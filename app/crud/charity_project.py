@@ -11,8 +11,8 @@ class CRUDCharityProject(CRUDBase):
 
     @staticmethod
     async def get_project_id_by_name(
-           project_name: str,
-           session: AsyncSession
+            project_name: str,
+            session: AsyncSession
     ) -> Optional[int]:
         db_project_id = await session.execute(
             select(CharityProject).where(CharityProject.name == project_name)
