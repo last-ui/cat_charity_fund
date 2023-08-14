@@ -39,9 +39,10 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
     async def validate_password(
         self, password: str, user: Union[UserCreate, User]
     ) -> None:
-        if len(password) < 3:
+        if len(password) < settings.min_password_length:
             raise InvalidPasswordException(
-                reason='Password should be at least 3 characters'
+                reason='Password should be at least '
+                       f'{settings.min_password_length} characters'
             )
         if user.email in password:
             raise InvalidPasswordException(

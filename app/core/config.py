@@ -11,6 +11,8 @@ class Settings(BaseSettings):
     first_superuser_email: Optional[EmailStr] = None
     first_superuser_password: Optional[str] = None
     jwt_lifetime: int = 60 * 60 * 24
+    min_password_length: int = 3
+    max_project_name_length = 100
 
     class Config:
         env_file = '.env'

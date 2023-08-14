@@ -30,16 +30,13 @@ async def create_new_charity_project(
     await check_name_duplicate(charity_project.name, session)
     donations = await donation_crud.get_not_fully_invested(session)
     if not donations:
-        new_project = await charity_project_crud.create(
-            charity_project,
+        return await charity_project_crud.create(
+            obj_in=charity_project,
             session=session
         )
-        return new_project
-    new_project = await run_investment(
-        obj_in=charity_project,
-        db_objects=donations,
-        session=session)
-    return new_project
+    return await run_investment(
+        obj_in=charity_project, db_objects=donations, session=session
+    )
 
 
 @router.get(
@@ -50,8 +47,7 @@ async def create_new_charity_project(
 async def get_all_charity_projects(
         session: AsyncSession = Depends(get_async_session)
 ):
-    charity_projects = await charity_project_crud.get_multi(session)
-    return charity_projects
+    return await charity_project_crud.get_multi(session)
 
 
 @router.delete(
@@ -83,9 +79,8 @@ async def partially_update_charity_project(
     project = await check_project_before_edit(project_id, obj_in, session)
     if obj_in.name is not None:
         await check_name_duplicate(obj_in.name, session)
-    project = await charity_project_crud.update(
+    return await charity_project_crud.update(
         db_obj=project,
         obj_in=obj_in,
         session=session
     )
-    return project
