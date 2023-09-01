@@ -52,6 +52,7 @@ uvicorn app.main:app
 
 <h2>Примеры запросов</h2>
 - POST-запрос регистрации пользователя:
+
 ```
 localhost:8000/donation/
 Content-Type: application/json
@@ -60,7 +61,9 @@ Content-Type: application/json
   "password": "string" 
 }
 ```
+
 - Пример ответа от сервера:
+  
 ```
 {
   "id": "string",
@@ -72,6 +75,7 @@ Content-Type: application/json
 ```
 
 - POST-запрос на создание пожертвования:
+  
 ```
 localhost:8000/donation/
 Content-Type: application/json
@@ -80,7 +84,9 @@ Content-Type: application/json
   "comment": "string"
 }
 ```
+
 - Пример ответа от сервера:
+  
 ```
 {
   "full_amount": 10,
@@ -89,12 +95,15 @@ Content-Type: application/json
   "create_date": "2022-08-10T05:51:20.143Z"
 }
 ```
+
 -  GET-запрос на получение списка своих пожертвований:
+  
 ```
 localhost:8000/donation/my
 ```
 
 - Пример ответа от сервера:
+  
 ```
 [
   {
